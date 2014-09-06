@@ -37,16 +37,66 @@ setup_gitconfig () {
       git_credential='osxkeychain'
     fi
 
-    user ' - What is your github author name?'
-    read -e git_authorname
-    user ' - What is your github author email?'
-    read -e git_authoremail
+    git_authorname='Kirill Yakovenko'
+    git_authoremail='kirill.yakovenko@me.com'
+
+    user " - What is your github author name? [$git_authorname] :"
+    read -e git_authorname_input
+    if ! [ "$git_authorname_input" == "" ]
+    then
+      git_authorname=$git_authorname_input
+    fi
+
+    user " - What is your github author email? [$git_authoremail] :"
+    read -e git_authoremail_input
+    if ! [ "$git_authoremail_input" == "" ]
+    then
+      git_authoremail=$git_authoremail_input
+    fi
 
     sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.symlink.example > git/gitconfig.symlink
 
     success 'gitconfig'
   fi
 }
+
+setup_nginx () {
+  if [ -f nginx/nginx.conf.symlink ]
+  then
+    info 'setup nginx'
+
+    nginx_workers='1'
+    nginx_user='blia admin'
+    nginx_projects="$HOME/Projects"
+
+    user " - How many worker processes? [$nginx_workers] :"
+    read -e nginx_workers_input
+    if ! [ "$nginx_workers_input" == "" ]
+    then
+      nginx_workers=$nginx_workers_input
+    fi
+
+    user " - What is your username and group? [$nginx_user] :"
+    read -e nginx_user_input
+    if ! [ "$nginx_user_input" == "" ]
+    then
+      nginx_user=$nginx_user_input
+    fi
+
+    user " - Where is stored your sites? [$nginx_projects] :"
+    read -e nginx_projects_input
+    if ! [ "$nginx_projects_input" == "" ]
+    then
+      nginx_projects=$nginx_projects_input
+    fi
+    echo $nginx_projects
+    sed -e "s/WORKERS/$nginx_workers/g" -e "s/USER/$nginx_user/g" -e "s#PROJECTS#$nginx_projects#g" -e "s#DOTFILES_ROOT#$DOTFILES_ROOT#g" nginx/nginx.conf.symlink.dist > nginx/nginx.conf.symlink
+    sed -e "s#PROJECTS#$nginx_projects#g" -e "s#HOME#$HOME#g" nginx/blia.nginx.plist.dist > nginx/blia.nginx.plist
+
+    success 'nginx'
+  fi
+}
+
 
 link_files () {
   ln -s $1 $2
@@ -121,9 +171,10 @@ install_dotfiles () {
 }
 
 setup_gitconfig
+setup_nginx
 install_dotfiles
 
-# If we're on a Mac, let's install and setup homebrew.
+#If we're on a Mac, let's install and setup homebrew.
 if [ "$(uname -s)" == "Darwin" ]
 then
   info "installing dependencies"

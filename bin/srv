@@ -1,0 +1,33 @@
+#!/bin/sh
+#
+# Manage nginx
+#
+# USAGE:
+#
+#   $ server command
+#   # => start stop or reload server
+
+if [[ "$1" = "" ]]; then
+  `nginx_status`
+  echo $nginx_status
+  if [ _nginx_status -eq 1 ]; then
+    echo "Stopping server"
+    launchctl unload ~/Library/LaunchAgents/blia.nginx.plist
+  else
+    echo "Starting server"
+    launchctl load ~/Library/LaunchAgents/blia.nginx.plist
+  fi
+else
+  case $1 in
+    "r" )
+      if [ _nginx_status -eq "1" ]; then
+        echo "Reloading server"
+        launchctl unload ~/Library/LaunchAgents/blia.nginx.plist
+        launchctl load ~/Library/LaunchAgents/blia.nginx.plist
+      else
+        echo "Starting server"
+        launchctl load ~/Library/LaunchAgents/blia.nginx.plist
+      fi
+      ;;
+  esac
+fi

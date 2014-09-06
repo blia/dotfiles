@@ -1,0 +1,22 @@
+#!/bin/sh
+#
+# Quick shortcut search docs in dash.app.
+#
+# USAGE:
+#
+#   $ d query
+#   # => search query in dash.app
+#
+#   $ d keyword query
+#   # => search query with keyword in dash.app
+
+if [ "$1" = "" ] ; then
+  echo "Usage: d [keyword] query"
+elif [ "$2" = "" ] ; then
+  open dash://$1
+else
+  for word in ${@:2} ; do
+    query="$query $word" ;
+  done
+  open dash://$1:"$query"
+fi
