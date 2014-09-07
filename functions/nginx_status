@@ -1,9 +1,0 @@
-ps cax | grep nginx > /dev/null
-if [ $? -eq 0 ]; then
-  pgrep nginx | grep `cat /usr/local/var/run/nginx.pid` > /dev/null
-  if [ $? -eq 0 ]; then
-    nginx_status=1
-  fi
-else
-  nginx_status=0
-fi

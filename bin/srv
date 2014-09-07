@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 #
 # Manage nginx
 #
@@ -6,11 +6,19 @@
 #
 #   $ server command
 #   # => start stop or reload server
+ps cax | grep nginx > /dev/null
+if [ $? -eq 0 ]; then
+  pgrep nginx | grep `cat /usr/local/var/run/nginx.pid` > /dev/null
+  if [ $? -eq 0 ]; then
+    stat=1
+  fi
+else
+  stat=0
+fi
+
 
 if [[ "$1" = "" ]]; then
-  `nginx_status`
-  echo $nginx_status
-  if [ _nginx_status -eq 1 ]; then
+  if [ $stat = 1 ]; then
     echo "Stopping server"
     launchctl unload ~/Library/LaunchAgents/blia.nginx.plist
   else
@@ -20,7 +28,7 @@ if [[ "$1" = "" ]]; then
 else
   case $1 in
     "r" )
-      if [ _nginx_status -eq "1" ]; then
+      if [ $stat = 1 ]; then
         echo "Reloading server"
         launchctl unload ~/Library/LaunchAgents/blia.nginx.plist
         launchctl load ~/Library/LaunchAgents/blia.nginx.plist
