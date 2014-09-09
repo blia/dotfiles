@@ -1,5 +1,5 @@
 worker_processes WORKERS;
-#user USER;
+user USER;
 error_log  nginx-error.log;
 
 events {

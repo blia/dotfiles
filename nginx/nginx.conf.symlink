@@ -1,5 +1,5 @@
 worker_processes 1;
-#user blia admin;
+user blia admin;
 error_log  nginx-error.log;
 
 events {
@@ -20,7 +20,7 @@ http {
   index index.html;
 
   server {
-    listen 8080;
+    listen 80;
     server_name localhost;
     root /Users/blia/.dotfiles/nginx;
   }

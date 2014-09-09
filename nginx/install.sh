@@ -10,9 +10,8 @@ fi
 
 if [ -f  ~/Library/LaunchAgents/blia.nginx.plist ]
   then
-  echo 1
-  launchctl unload  ~/Library/LaunchAgents/blia.nginx.plist
-  rm ~/Library/LaunchAgents/blia.nginx.plist
+  sudo launchctl unload  ~/Library/LaunchAgents/blia.nginx.plist
+  sudo rm ~/Library/LaunchAgents/blia.nginx.plist
 fi
 
 if [ -f  ~/Library/LaunchAgents/homebrew.mxcl.nginx.plist ]
@@ -23,7 +22,10 @@ fi
 
 
 ln -s "$dir/nginx/blia.nginx.plist" ~/Library/LaunchAgents
-launchctl load ~/Library/LaunchAgents/blia.nginx.plist
+
+echo "Allow nginx on port :80"
+sudo chown root:wheel ~/Library/LaunchAgents/blia.nginx.plist
+sudo launchctl load ~/Library/LaunchAgents/blia.nginx.plist
 
 open http://localhost:8080/
 
