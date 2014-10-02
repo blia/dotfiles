@@ -20,21 +20,21 @@ echo $stat
 if [[ "$1" = "" ]]; then
   if [ $stat = 1 ]; then
     echo "Stopping server"
-    sudo launchctl unload ~/Library/LaunchAgents/blia.nginx.plist
+    sudo /usr/local/bin/nginx -s stop
   else
     echo "Starting server"
-    sudo launchctl load ~/Library/LaunchAgents/blia.nginx.plist
+    sudo /usr/local/bin/nginx -p /Users/blia/Projects -c /Users/blia/.nginx.conf
   fi
 else
   case $1 in
     "r" )
       if [ $stat = 1 ]; then
         echo "Reloading server"
-        sudo launchctl unload ~/Library/LaunchAgents/blia.nginx.plist
-        sudo launchctl load ~/Library/LaunchAgents/blia.nginx.plist
+        sudo /usr/local/bin/nginx -s stop
+        sudo /usr/local/bin/nginx -p /Users/blia/Projects -c /Users/blia/.nginx.conf
       else
         echo "Starting server"
-        sudo launchctl load ~/Library/LaunchAgents/blia.nginx.plist
+        sudo /usr/local/bin/nginx -p /Users/blia/Projects -c /Users/blia/.nginx.conf
       fi
       ;;
   esac
