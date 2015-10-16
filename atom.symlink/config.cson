@@ -1,0 +1,79 @@
+"*":
+  editor:
+    showInvisibles: true
+    showIndentGuide: true
+    useShadowDOM: true
+    invisibles: {}
+    softWrapAtPreferredLineLength: true
+    fontFamily: "monaco"
+  "exception-reporting":
+    userId: "4b9ff696-1deb-c7cc-50a3-fa7845f32be9"
+  welcome:
+    showOnStartup: false
+  metrics:
+    userId: "127979c942e36b908e7274230bc9d1a8137b2ada"
+  core:
+    disabledPackages: [
+      "language-make"
+      "archive-view"
+      "autocomplete-css"
+      "autocomplete-html"
+      "autocomplete-snippets"
+      "autosave"
+      "background-tips"
+      "bookmarks"
+      "command-palette"
+      "dev-live-reload"
+      "encoding-selector"
+      "exception-reporting"
+      "fuzzy-finder"
+      "go-to-line"
+      "image-view"
+      "incompatible-packages"
+      "language-c"
+      "language-clojure"
+      "language-coffee-script"
+      "language-csharp"
+      "language-go"
+      "language-hyperlink"
+      "language-java"
+      "language-less"
+      "autocomplete-atom-api"
+      "language-mustache"
+      "language-objective-c"
+      "language-perl"
+      "language-php"
+      "language-property-list"
+      "language-python"
+      "language-ruby"
+      "language-ruby-on-rails"
+      "language-shellscript"
+      "language-source"
+      "language-sql"
+      "language-toml"
+      "language-xml"
+      "language-yaml"
+      "link"
+      "metrics"
+      "open-on-github"
+      "package-generator"
+      "spell-check"
+      "styleguide"
+      "symbols-view"
+      "welcome"
+    ]
+    themes: [
+      "seti-ui"
+      "seti-syntax"
+    ]
+    projectHome: "/Users/blia/Projects"
+  linter:
+    showAllErrorsInStatusBar: true
+    showErrorInline: true
+  "linter-jshint":
+    laxcomma: true
+  "merge-conflicts":
+    gitPath: "/usr/bin/git"
+  emmet: {}
+  "tree-view":
+    hideIgnoredNames: true
