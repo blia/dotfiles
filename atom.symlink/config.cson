@@ -64,7 +64,7 @@
     ]
     themes: [
       "seti-ui"
-      "seti-syntax"
+      "atom-dark-syntax"
     ]
     projectHome: "/Users/blia/Projects"
   linter:
